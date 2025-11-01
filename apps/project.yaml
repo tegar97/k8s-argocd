@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: my-app
+  namespace: argocd
+spec:
+  description: Project untuk my-app dev, staging, prod
+  sourceRepos:
+    - https://github.com/tegar97/k8s-argocd.git
+  destinations:
+    - namespace: my-app-dev
+      server: https://kubernetes.default.svc
+    - namespace: my-app-staging
+      server: https://kubernetes.default.svc
+    - namespace: my-app-prod
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  orphanedResources:
+    warn: true

@@ -1,0 +1,89 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-my-app
+  namespace: argocd
+spec:
+  project: my-app
+  source:
+    repoURL: https://github.com/tegar97/k8s-argocd.git
+    targetRevision: main
+    path: apps
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+# DEV (auto)
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-dev
+  namespace: argocd
+spec:
+  project: my-app
+  source:
+    repoURL: https://github.com/tegar97/k8s-argocd.git
+    targetRevision: main
+    path: overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-app-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+# STAGING (auto, lengkap)
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-staging
+  namespace: argocd
+spec:
+  project: my-app
+  source:
+    repoURL: https://github.com/tegar97/k8s-argocd.git
+    targetRevision: main
+    path: overlays/staging
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-app-staging
+  syncPolicy:
+    automated:
+      prune: true        # hapus resource yang sudah tidak dideklarasikan
+      selfHeal: true     # balikin drift ke kondisi Git
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+  # Kamu bisa tambahkan sync window kalau pengen jam kerja doang:
+  # syncPolicy:
+  #   syncWindows:
+  #     - kind: allow
+  #       schedule: 'Mon-Fri 09:00-18:00'
+  #       timezone: 'Asia/Jakarta'
+---
+# PROD (manual, perlu approval + tombol Sync)
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-prod
+  namespace: argocd
+spec:
+  project: my-app
+  source:
+    repoURL: https://github.com/tegar97/k8s-argocd.git
+    targetRevision: main
+    path: overlays/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-app-prod
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
