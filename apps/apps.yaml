@@ -73,7 +73,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app-prod
+  name: my-app-prod 
   namespace: argocd
 spec:
   project: my-app
