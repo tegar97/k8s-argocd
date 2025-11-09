@@ -5,8 +5,14 @@ metadata:
   namespace: my-app-dev
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - dev.tegarr.site
+      secretName: my-app-dev-tls
   rules:
     - host: dev.tegarr.site
       http:
