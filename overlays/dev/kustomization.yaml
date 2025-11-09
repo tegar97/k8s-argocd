@@ -11,11 +11,11 @@ configMapGenerator:
   - name: my-app-config
     literals:
       - ENV=dev
-# patches:
-#   - target:
-#       kind: Service
-#       name: my-app
-#     patch: |-
-#       - op: add
-#         path: /spec/ports/0/nodePort
-#         value: 30080
+    # patches:
+    #   - target:
+    #       kind: Service
+    #       name: my-app
+    #     patch: |-
+    #       - op: add
+    #         path: /spec/ports/0/nodePort
+    #         value: 30080
