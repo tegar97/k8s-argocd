@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: my-app-staging
 resources:
   - ../../base
-  - ingress.yaml
+  # - ingress.yaml
 images:
   - name: tegar900/my-app
     newTag: v1.0.6
