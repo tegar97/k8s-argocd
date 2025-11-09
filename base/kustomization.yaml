@@ -4,3 +4,6 @@ resources:
   - rollout.yaml
   - service.yaml
   - service-preview.yaml
+images:
+  - name: tegar900/my-app
+    newTag: latest
