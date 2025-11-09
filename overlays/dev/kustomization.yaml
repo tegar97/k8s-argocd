@@ -5,7 +5,7 @@ resources:
   - ../../base
 images:
   - name: tegar900/my-app
-    newTag: v1.0.4
+    newTag: v1.0.5
 configMapGenerator:
   - name: my-app-config
     literals:
