@@ -6,7 +6,7 @@ resources:
   - ingress.yaml
 images:
   - name: tegar900/my-app
-    newTag: dev
+    newTag: 70f036c
 configMapGenerator:
   - name: my-app-config
     literals:
