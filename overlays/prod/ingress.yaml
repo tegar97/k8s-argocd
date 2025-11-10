@@ -3,8 +3,15 @@ kind: Ingress
 metadata:
   name: my-app-prod
   namespace: my-app-prod
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - tegarr.site
+      secretName: my-app-prod-tls
   rules:
     - host: tegarr.site
       http:

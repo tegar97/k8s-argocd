@@ -1,37 +1,17 @@
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: my-app-dev
-#   namespace: my-app-dev
-#   annotations:
-#     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-#     cert-manager.io/cluster-issuer: letsencrypt-prod
-# spec:
-#   ingressClassName: nginx
-#   tls:
-#     - hosts:
-#         - dev.tegarr.site
-#       secretName: my-app-dev-tls
-#   rules:
-#     - host: dev.tegarr.site
-#       http:
-#         paths:
-#           - path: /
-#             pathType: Prefix
-#             backend:
-#               service:
-#                 name: my-app
-#                 port:
-#                   number: 80
-
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-app-dev
   namespace: my-app-dev
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - dev.tegarr.site
+      secretName: my-app-dev-tls
   rules:
     - host: dev.tegarr.site
       http:
