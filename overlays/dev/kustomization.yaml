@@ -5,7 +5,7 @@ patchesStrategicMerge:
   - rollout-patch.yaml
 resources:
   - ../../base
-  - ingress.yaml
+  # - ingress.yaml
 images:
   - name: tegar900/my-app
     newTag: db4d6b6
