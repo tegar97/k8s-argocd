@@ -8,7 +8,7 @@ resources:
   # - ingress.yaml
 images:
   - name: tegar900/my-app
-    newTag: db4d6b6
+    newTag: "3846386"
 configMapGenerator:
   - name: my-app-config
     literals:
